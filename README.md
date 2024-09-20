@@ -39,7 +39,7 @@ To set up the necessary components, follow these steps:
 
     bash
 
-chmod +x attack_script.sh
+chmod +x DdosHping3.sh
 
 Install hping3 (if not installed):
 
@@ -59,7 +59,7 @@ To run the script, execute the following command:
 
 bash
 
-./attack_script.sh
+./DdosHping3.sh
 
 You will be prompted to enter:
 
@@ -95,3 +95,5 @@ Contributions are welcome! If you have suggestions for improvements or new featu
 License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
+@Made by Vishal Waghmare 
+instagram@realvilu

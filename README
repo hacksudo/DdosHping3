@@ -1,8 +1,8 @@
-# DdosHping3
+#DdosHping3
 
 Welcome to the **DdosHping3** repository! This project provides a bash script that allows users to simulate various network attack scenarios using `hping3`. The script offers a user-friendly interface for selecting attack types, targeting specific IPs, and managing multiple terminal instances for concurrent execution.
 
-## Table of Contents
+##Table of Contents
 
 - [Introduction](#introduction)
 - [Prerequisites](#prerequisites)
@@ -14,11 +14,11 @@ Welcome to the **DdosHping3** repository! This project provides a bash script th
 - [Contributing](#contributing)
 - [License](#license)
 
-## Introduction
+##Introduction
 
 This repository serves as a tool for educational purposes, particularly in understanding network security, penetration testing, and the implications of various types of Denial-of-Service (DoS) attacks. By using this script, users can experiment in a controlled environment to learn how these attacks work and how to defend against them.
 
-## Prerequisites
+##Prerequisites
 
 Before using the script, ensure you have the following installed on your system:
 
@@ -26,7 +26,7 @@ Before using the script, ensure you have the following installed on your system:
 - **Terminal Emulator**: The script supports either `xterm` or `gnome-terminal`. Ensure one of these is installed.
 - **wmctrl** (optional): This tool can be used for automatically arranging terminal windows, though it's not mandatory.
 
-## Installation
+##Installation
 
 To set up the necessary components, follow these steps:
 
